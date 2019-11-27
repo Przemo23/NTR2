@@ -1,0 +1,35 @@
+@model NTR02.Models.Note
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="well">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-sm-1">Title: </div>            
+            <div class="col-sm-9">
+                <input asp-for="Title" type="text" style = "width:500px" />
+            </div>
+            <div class ="col-sm-2">
+            </div>
+        </div>
+        <textarea asp-for="Description" type="text" style="width:1100px; height:400px;"> </textarea>
+        <div class = "row">
+        <div class = "col-sm-5 col-sm-offset-4"> Category:
+        </div>
+        <div class = "col-sm-3"> Date:
+            <input asp-for="NoteDate" />
+        </div>
+        <hr/>
+        </div>
+        <div align="right">
+            <input type="submit" value="OK" class="btn btn-secondary" />
+            <a asp-action="Index" type="button" class="btn btn-secondary">Cancel</a>          
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
