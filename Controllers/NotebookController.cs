@@ -23,7 +23,11 @@ namespace NTR02.Controllers
         // GET: Notebook
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Note.ToListAsync());
+            ViewBag.Notes = await _context.Note.ToListAsync();
+            ViewBag.Categories = await _context.Category.ToListAsync();
+            ViewBag.NoteCategories = await _context.NoteCategory.ToListAsync();
+            
+            return View();
         }
 
         
@@ -31,6 +35,7 @@ namespace NTR02.Controllers
         // GET: Notebook/Create
         public IActionResult Create()
         {
+            ViewBag.Categories = FindNewNoteCategories(0);
             return View();
         }
 
@@ -66,18 +71,19 @@ namespace NTR02.Controllers
         }
 
         // GET: Notebook/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return NotFound();
-            }
+            }*/
 
             var note = await _context.Note.FindAsync(id);
             if (note == null)
             {
                 return NotFound();
             }
+            ViewBag.Categories = FindNewNoteCategories(id);
             return View(note);
         }
 
@@ -146,6 +152,28 @@ namespace NTR02.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> UpdateCategories(string category, int id, string action, string submit)
+        {
+            if(submit == "Add")
+            {
+                if(_context.Category.Where(cat =>cat.Name == category).Count() ==0)               
+                    _context.Add(category);
+                await _context.SaveChangesAsync();
+                NoteCategory newNCat = new NoteCategory();
+                
+                newNCat.CategoryID = _context.Category.Where(cat => cat.Name == category).First().CategoryID;
+                newNCat.NoteID = 0;
+                _context.Add(newNCat);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else if(submit == "Remove" )
+            {
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Filter(DateTime from, DateTime to, string category)
         {
             if(DateTime.Compare(from,to) > 0)
@@ -183,6 +211,15 @@ namespace NTR02.Controllers
         {
             if(page*10 == filteredNotesCount +9 && page != 1)
                 page--;
+        }
+        private List<Category> FindNewNoteCategories(int id)
+        {
+            List<Category> newNoteCategories = new List<Category>();
+            foreach(var noteCategory in _context.NoteCategory.Where(nCat => nCat.NoteID == id))
+            {
+                newNoteCategories.Add(_context.Category.Find(noteCategory.CategoryID));
+            }
+            return newNoteCategories;
         }
     }
 }

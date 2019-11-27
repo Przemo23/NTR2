@@ -8433,11 +8433,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ubuntu18/NTR02/NTR02/NTR02.csproj",
+      "projectUniqueName": "/home/ubuntu18/NTR02/NTR02.csproj",
       "projectName": "NTR02",
-      "projectPath": "/home/ubuntu18/NTR02/NTR02/NTR02.csproj",
+      "projectPath": "/home/ubuntu18/NTR02/NTR02.csproj",
       "packagesPath": "/home/ubuntu18/.nuget/packages/",
-      "outputPath": "/home/ubuntu18/NTR02/NTR02/obj/",
+      "outputPath": "/home/ubuntu18/NTR02/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/ubuntu18/.nuget/NuGet/NuGet.Config"

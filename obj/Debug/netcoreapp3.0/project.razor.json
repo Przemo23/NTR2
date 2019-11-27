@@ -1,5 +1,5 @@
 {
-  "FilePath": "/home/ubuntu18/NTR02/NTR02/NTR02.csproj",
+  "FilePath": "/home/ubuntu18/NTR02/NTR02.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -1944,7 +1944,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -2085,7 +2085,7 @@
         "Kind": "Components.Component",
         "Name": "Microsoft.AspNetCore.Components.Forms.EditForm",
         "AssemblyName": "Microsoft.AspNetCore.Components.Web",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            Renders a form element that cascades an <see cref=\"P:Microsoft.AspNetCore.Components.Forms.EditForm.EditContext\" /> to descendants.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -9043,7 +9043,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.Razor",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting elements containing attributes with URL expected values.\n            </summary>\n            <remarks>Resolves URLs starting with '~/' (relative to the application's 'webroot' setting) that are not\n            targeted by other <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" />s. Runs prior to other <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" />s to ensure\n            application-relative URLs are resolved.</remarks>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": false,
         "TagMatchingRules": [
@@ -14344,58 +14344,58 @@
   "RootNamespace": "NTR02",
   "Documents": [
     {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Shared/_Layout.cshtml",
+      "FilePath": "/home/ubuntu18/NTR02/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views/Shared/_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Notebook/Delete.cshtml",
-      "TargetPath": "Views/Notebook/Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Shared/Error.cshtml",
-      "TargetPath": "Views/Shared/Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/_ViewImports.cshtml",
-      "TargetPath": "Views/_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/_ViewStart.cshtml",
+      "FilePath": "/home/ubuntu18/NTR02/Views/_ViewStart.cshtml",
       "TargetPath": "Views/_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Notebook/Index.cshtml",
-      "TargetPath": "Views/Notebook/Index.cshtml",
+      "FilePath": "/home/ubuntu18/NTR02/Views/_ViewImports.cshtml",
+      "TargetPath": "Views/_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Notebook/Create.cshtml",
-      "TargetPath": "Views/Notebook/Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Home/Privacy.cshtml",
+      "FilePath": "/home/ubuntu18/NTR02/Views/Home/Privacy.cshtml",
       "TargetPath": "Views/Home/Privacy.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Notebook/Edit.cshtml",
+      "FilePath": "/home/ubuntu18/NTR02/Views/Notebook/Delete.cshtml",
+      "TargetPath": "Views/Notebook/Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ubuntu18/NTR02/Views/Notebook/Edit.cshtml",
       "TargetPath": "Views/Notebook/Edit.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Shared/_ValidationScriptsPartial.cshtml",
+      "FilePath": "/home/ubuntu18/NTR02/Views/Shared/_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views/Shared/_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ubuntu18/NTR02/NTR02/Views/Home/Index.cshtml",
+      "FilePath": "/home/ubuntu18/NTR02/Views/Home/Index.cshtml",
       "TargetPath": "Views/Home/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ubuntu18/NTR02/Views/Notebook/Index.cshtml",
+      "TargetPath": "Views/Notebook/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ubuntu18/NTR02/Views/Shared/Error.cshtml",
+      "TargetPath": "Views/Shared/Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ubuntu18/NTR02/Views/Notebook/Create.cshtml",
+      "TargetPath": "Views/Notebook/Create.cshtml",
       "FileKind": "mvc"
     }
   ],
