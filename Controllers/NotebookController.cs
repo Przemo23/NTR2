@@ -23,15 +23,13 @@ namespace NTR02.Controllers
         // GET: Notebook
         public async Task<IActionResult> Index()
         {
+            CleanNoteCategories();
             ViewBag.Notes = await _context.Note.ToListAsync();
             ViewBag.Categories = await _context.Category.ToListAsync();
             ViewBag.NoteCategories = await _context.NoteCategory.ToListAsync();
-            
+                        
             return View();
         }
-
-        
-
         // GET: Notebook/Create
         public IActionResult Create()
         {
@@ -48,23 +46,13 @@ namespace NTR02.Controllers
         string Category)
         {
             if (ModelState.IsValid)
-            {
-                Category category = new Category();
-                NoteCategory noteCategory = new NoteCategory();
-                category.Name = Category;
-               
+            {              
                 if(_context.Note.Where(notie =>notie.Title == note.Title).Count() ==0)               
                     _context.Add(note);
                 else
                     return View(note);
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                
-                 noteCategory.NoteID = _context.Note.Where(notie => notie.Title == note.Title).First().NoteID;
-                noteCategory.CategoryID = _context.Category.Where(cat => cat.Name == category.Name).First().CategoryID;
-                _context.Add(noteCategory);
-                await _context.SaveChangesAsync();
-
+                await _context.SaveChangesAsync(); 
+                SubmitNoteCategories(note.NoteID);
                 return RedirectToAction(nameof(Index));
             }
             return View(note);
@@ -152,26 +140,52 @@ namespace NTR02.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> UpdateCategories(string category, int id, string action, string submit)
+        public async Task<IActionResult> UpdateCategory(string category, int id, string view, string submit)
         {
             if(submit == "Add")
+                AddCategory(category,id);
+            else if(submit == "Remove" )
+                RemoveCategory(category,id);
+            else
+                return RedirectToAction(nameof(Index));
+            
+            if(view == "Create")
+                return RedirectToAction(nameof(Create));
+            else
+                return RedirectToAction(nameof(Edit),new{id = id});
+            
+        }
+        public async void AddCategory(String category, int id)
+        {
+            if(_context.Category.Where(cat =>cat.Name == category).Count() ==0)               
             {
-                if(_context.Category.Where(cat =>cat.Name == category).Count() ==0)               
-                    _context.Add(category);
+                Category cat = new Category();
+                cat.Name = category;
+                _context.Add(cat);
                 await _context.SaveChangesAsync();
-                NoteCategory newNCat = new NoteCategory();
-                
-                newNCat.CategoryID = _context.Category.Where(cat => cat.Name == category).First().CategoryID;
-                newNCat.NoteID = 0;
+            }
+            int catID = _context.Category.Where(cat => cat.Name == category).First().CategoryID;    
+            if(_context.NoteCategory.Where(cat => cat.NoteID == id && cat.CategoryID == catID).Count() == 0)
+            {
+                NoteCategory newNCat = new NoteCategory();            
+                newNCat.CategoryID = catID;
+                newNCat.NoteID =id;
                 _context.Add(newNCat);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            else if(submit == "Remove" )
+            
+        }
+        public async void RemoveCategory(String category, int id)
+        {
+            if(_context.Category.Where(cat =>cat.Name == category).Count() ==0)
+                return;
+            int catID = _context.Category.Where(cat =>cat.Name == category).First().CategoryID;
+            if(_context.NoteCategory.Where(cat => cat.NoteID == id && cat.CategoryID == catID).Count() != 0)
             {
-
+                NoteCategory toDelete  = _context.NoteCategory.Where(cat => cat.NoteID == id && cat.CategoryID == catID).First();
+                _context.NoteCategory.Remove(toDelete);
+                await _context.SaveChangesAsync();
             }
-            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Filter(DateTime from, DateTime to, string category)
@@ -220,6 +234,26 @@ namespace NTR02.Controllers
                 newNoteCategories.Add(_context.Category.Find(noteCategory.CategoryID));
             }
             return newNoteCategories;
+        }
+        private async void CleanNoteCategories()
+        {
+            
+            foreach(var nCatie in _context.NoteCategory.Where(nCat => nCat.NoteID ==0))
+            {
+                _context.NoteCategory.Remove(nCatie);
+            }
+            await _context.SaveChangesAsync(); 
+
+        }
+        private async void SubmitNoteCategories(int id)
+        {
+            foreach(var nCatie in _context.NoteCategory.Where(nCat => nCat.NoteID ==0))
+            {
+                
+                nCatie.NoteID = id;
+                _context.NoteCategory.Update(nCatie);
+            }
+            await _context.SaveChangesAsync(); 
         }
     }
 }
